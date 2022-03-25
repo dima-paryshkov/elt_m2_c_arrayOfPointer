@@ -6,27 +6,37 @@ int** dividingAnArrayIntoParts(int* inputArray, const int* lenght, int* resultLe
 	if (*lenght == 1)
 		return NULL;
 
-
 	*resultLenght = 1;
 	int** result = (int**)malloc(sizeof(int*) * *resultLenght);
-	int maxLenghtResult = 1;
 
+	// this value is needed to control memory allocation for the result array
+ 	int maxLenghtResult = 1;
+
+	// current value of incrementing values
 	int currentLenght = 1;
 	int LenghtNIV = 1;
+
+	// index, when started incrementing values
 	int startIndex;
+
 	int* nonIncreasingValues = (int*)malloc(sizeof(int) * LenghtNIV);
+
+	// this value is needed to control memory allocation for the array non-increasing values
 	int maxLenghtNIR = 1;
 
 	for (int i = 0; i < *lenght - 1; i++)
 	{
+		// if next value more, than last, then incrementing values
 		if (inputArray[i] < inputArray[i + 1])
 		{
 			if (currentLenght == 1)
 				startIndex = i;
 			currentLenght++;
 		}
+		// if incrementing values is finished
 		else
 		{
+			// if single character
 			if (currentLenght == 1)
 			{
 				nonIncreasingValues[0] = LenghtNIV++;
@@ -37,6 +47,7 @@ int** dividingAnArrayIntoParts(int* inputArray, const int* lenght, int* resultLe
 				}
 				nonIncreasingValues[LenghtNIV - 1] = inputArray[i];
 			}
+			// process incrementing values
 			else
 			{
 				if ((*resultLenght + 1) >= maxLenghtResult)
@@ -56,6 +67,7 @@ int** dividingAnArrayIntoParts(int* inputArray, const int* lenght, int* resultLe
 			}
 		}
 	}
+	// process last symbol
 	if (currentLenght == 1)
 	{
 		nonIncreasingValues[0] = LenghtNIV++;
@@ -83,6 +95,8 @@ int** dividingAnArrayIntoParts(int* inputArray, const int* lenght, int* resultLe
 		currentLenght = 1;
 		(*resultLenght)++;
 	}
+
+	// add at the end result non-increasing values
 	result[*resultLenght - 1] = nonIncreasingValues;
 
 	return result;
