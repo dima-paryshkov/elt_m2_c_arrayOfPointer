@@ -104,4 +104,17 @@ int main()
 		inputArray[lenght] = tmp;
 	}
 
+	//input data: 1 2 3 5 4 6 7 2 1 2 3 -1
+	int resultLenght;
+	int** result = dividingAnArrayIntoParts(inputArray, &lenght, &resultLenght);
+
+	fprintf(stdout, "Result: \n");
+	for (int i = 0; i < resultLenght; i++)
+	{
+		for (int j = 1; j < result[i][0] + 1; j++)
+		{
+			fprintf(stdout, "%d ", result[i][j]);
+		}
+		fprintf(stdout, "\n");
+	}
 }
